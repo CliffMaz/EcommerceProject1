@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org" xmlns:c="">
+<head th:replace="mainNavHeader :: header">
+
+
+</head>
+<body>
+
+<!--navbar-->
+<nav th:replace="adminNavbar :: adminNav"></nav>
+
+<div class="container text-center">
+<h1>Welcome Cliford</h1>
+
+<a href="/category/all"><button  type="button" class="btn btn-primary btn-lg btn-block">Manage Categories</button></a>
+<a href="/productManagement"><button  type="button" class="btn btn-primary btn-lg btn-block">Manage Products</button></a>
+
+</div>
+
+</body>
+</html>

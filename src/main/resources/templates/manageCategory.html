@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org">
+<head th:replace="mainNavHeader :: header">
+
+</head>
+<body>
+
+<!--navbar-->
+<nav th:replace="adminNavbar :: adminNav"></nav>
+<div class="container">
+<form>
+    <div class="form-group">
+        <label for="formGroupExampleInput">Category name</label>
+        <input type="text" class="form-control" id="formGroupExampleInput" placeholder="Example input">
+    </div>
+    <button type="submit" class="btn btn-primary">Add Category</button>
+
+</form>
+
+    <table class="table table-sm table-dark">
+        <tbody >
+
+        <thead>
+        <tr>
+            <th scope="col">Category id</th>
+            <th scope="col">Category name</th>
+
+            <td scope="col">Edit/Delete</td>
+        </tr>
+        </thead>
+        <tr th:each="category: ${categories}">
+            <td th:text="${category.categoryId}"></td>
+            <td th:text="${category.categoryType}"></td>
+
+            <td scope="col">
+                <button class="btn btn-primary" >Edit</button>
+                <button class="btn btn-danger mx-3" >Delete</button>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+</div>
+
+</body>
+</html>

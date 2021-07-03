@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org" >
+<head th:replace="mainNavHeader :: header">
+
+</head>
+<body>
+
+<!--navbar-->
+<nav th:replace="adminNavbar :: adminNav"></nav>
+
+
+<div class="container text-center">
+    <div class="container">
+<form th:action="@{/productManagement/addProduct}" th:object="${productForm}" th:method="POST">
+
+    <div class="form-group">
+        <label for="formGroupExampleInput">Product name</label>
+        <input type="text" name="product_name" class="form-control" id="formGroupExampleInput" placeholder="Example input" required>
+    </div>
+    <div class="form-group">
+        <label for="formGroupExampleInput">Product description</label>
+        <input type="text" name="product_desc" class="form-control" id="formGroupExampleInput" placeholder="Example input" required>
+    </div>
+    <div class="form-group">
+        <label for="formGroupExampleInput">Product price</label>
+        <input type="text" name="product_price" class="form-control" id="formGroupExampleInput" placeholder="Example input" required>
+    </div>
+    <div class="form-group">
+        <label for="exampleFormControlFile1"> File input</label>
+        <input type="file" name="product_img" class="form-control-file" id="exampleFormControlFile1" required>
+    </div>
+
+    <select class="form-control form-control-lg" name="product_category" required>
+        <option th:each="category: ${categoryList}" th:text="${category.categoryType}"/>
+    </select>
+
+
+<div class="container">
+    <a href="/productManagement/addProduct"><input  type="submit" value="save" class="btn btn-primary btn-lg btn-block"/></a>
+</div>
+    <br/>
+
+</form>
+</div>
+
+
+<table class="table table-sm table-dark">
+<tbody >
+
+<thead>
+<tr>
+    <th scope="col">Product image</th>
+    <th scope="col">Product id</th>
+    <td scope="col">Product name</td>
+    <td scope="col">Product Description</td>
+    <td scope="col">Product Price</td>
+    <td scope="col">Edit/Delete</td>
+</tr>
+</thead>
+<tr th:each="product: ${productList}">
+    <td th:text="${product.product_img}"></td>
+    <td th:text="${product.productId}"></td>
+    <td th:text="${product.product_name}"></td>
+    <td th:text="${product.product_desc}"></td>
+    <td th:text="${product.product_price}"></td>
+    <td scope="col">
+        <button class="btn btn-primary" >Edit</button>
+        <button class="btn btn-danger mx-3" >Delete</button>
+    </td>
+</tr>
+</tbody>
+</table>
+</div>
+</body>
+</html>
