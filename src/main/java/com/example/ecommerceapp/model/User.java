@@ -1,6 +1,7 @@
 package com.example.ecommerceapp.model;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 public class User {
@@ -11,6 +12,7 @@ public class User {
     private Long userId;
     private String username;
     private String password;
+    private String email;
     private String role;
 
     public User() {
@@ -41,7 +43,19 @@ public class User {
         this.password = password;
     }
 
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
     public String getRole() {
         return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
     }
 }

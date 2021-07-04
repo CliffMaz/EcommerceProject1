@@ -15,15 +15,19 @@ public class CUserDetailsService implements UserDetailsService {
 
     @Autowired
     private UserRepo userRepo;
+
+    public CUserDetailsService(UserRepo userRepo) {
+        this.userRepo = userRepo;
+    }
+
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 
-        Optional<User> user = Optional.ofNullable((userRepo.findUserByUsername(username)));
-        user.orElseThrow(() -> new UsernameNotFoundException("user "+username+" not found"));
-
-        return user.map(CUserDetails::new).get();
-
-
-
+        User user = userRepo.findUserByUsername(username);
+        if (user == null) {
+            throw new UsernameNotFoundException("user " + username + " not found");
+        }else {
+            return new CUserDetails(user);
+        }
     }
 }

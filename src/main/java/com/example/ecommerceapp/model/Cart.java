@@ -1,9 +1,23 @@
 package com.example.ecommerceapp.model;
 
+import javax.persistence.*;
+
+@Entity
 public class Cart {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(nullable = false, unique = true)
     private Long cart_id;
+
+    @ManyToOne
+    @JoinColumn(name="product_id")
     private Product product;
+
+    @ManyToOne
+    @JoinColumn(name="userId")
     private User user;
+
     private int quantity;
 
 

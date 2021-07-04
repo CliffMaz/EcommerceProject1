@@ -2,25 +2,27 @@ package com.example.ecommerceapp.service;
 
 import com.example.ecommerceapp.model.Cart;
 import com.example.ecommerceapp.model.Product;
+import com.example.ecommerceapp.model.User;
 import com.example.ecommerceapp.repo.CartRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
 public class CartService {
-
-    private final CartRepo cartRepo;
+/*
+     CartRepo cartRepo;
 
     @Autowired
     public CartService(CartRepo cartRepo){
         this.cartRepo=cartRepo;
     }
 
-    public Optional<Cart> getCartByID(Long id){
+    public List<Cart> getCartByUserId(User user){
 
-       return cartRepo.findById(id);
+       return cartRepo.findByUser(user);
     }
 
     public Cart AddProduct(Cart cart){
@@ -29,7 +31,7 @@ public class CartService {
     }
 
     public  Cart updateQuantityById(){
-
-        return cartRepo.updateQuantityByCartId();
-    }
+        return null;
+        //return cartRepo.updateQuantityByCart();
+    }*/
 }
