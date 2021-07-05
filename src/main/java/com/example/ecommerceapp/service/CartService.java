@@ -12,15 +12,17 @@ import java.util.Optional;
 
 @Service
 public class CartService {
-/*
+
      CartRepo cartRepo;
+
 
     @Autowired
     public CartService(CartRepo cartRepo){
         this.cartRepo=cartRepo;
+
     }
 
-    public List<Cart> getCartByUserId(User user){
+    public List<Cart> getCartByUser(User user){
 
        return cartRepo.findByUser(user);
     }
@@ -33,5 +35,5 @@ public class CartService {
     public  Cart updateQuantityById(){
         return null;
         //return cartRepo.updateQuantityByCart();
-    }*/
+    }
 }

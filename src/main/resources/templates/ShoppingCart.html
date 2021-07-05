@@ -1,10 +1,40 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
+<html xmlns:th="https://www.thymeleaf.org">
+<head th:replace="mainNavHeader :: header"></head>
 <body>
+<nav th:replace="mainNavHeader :: navbar"></nav>
+
+
+
+  <table class="table table-sm table-dark">
+    <tbody >
+
+    <thead>
+    <tr>
+      <th scope="col">Product Image</th>
+      <th scope="col">Product Name</th>
+      <th scope="col">Quantity</th>
+      <th scope="col">Price</th>
+      <th scope="col">Remove From Cart</th>
+
+      <td scope="col">Edit/Delete</td>
+    </tr>
+    </thead>
+    <tr th:each="cart: ${myCart}">
+      <td th:text="${cart.product.getProduct_img()}"></td>
+      <td th:text="${cart.product.getProduct_name()}"></td>
+      <td th:text="${cart.getQuantity()}"></td>
+      <td th:text="${cart.product.getProduct_price()}"></td>
+
+      <td scope="col">
+        <button class="btn btn-primary" >Edit</button>
+        <button class="btn btn-danger mx-3" >Delete</button>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+
+
 
 <section>
 

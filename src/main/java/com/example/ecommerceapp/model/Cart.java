@@ -3,12 +3,13 @@ package com.example.ecommerceapp.model;
 import javax.persistence.*;
 
 @Entity
+
 public class Cart {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(nullable = false, unique = true)
-    private Long cart_id;
+    private Integer cart_id;
 
     @ManyToOne
     @JoinColumn(name="product_id")
@@ -21,11 +22,11 @@ public class Cart {
     private int quantity;
 
 
-    public Long getCart_id() {
+    public Integer getCart_id() {
         return cart_id;
     }
 
-    public void setCart_id(Long cart_id) {
+    public void setCart_id(Integer cart_id) {
         this.cart_id = cart_id;
     }
 

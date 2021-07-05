@@ -10,7 +10,7 @@ public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(nullable = false, updatable= false)
-    private Long productId;
+    private Integer productId;
     private String product_name;
     private String product_desc;
     private String product_price;
@@ -26,11 +26,11 @@ public class Product {
         this.product_category = product_category;
     }
 
-    public Long getProductId() {
+    public Integer getProductId() {
         return productId;
     }
 
-    public void setProductId(Long productId) {
+    public void setProductId(Integer productId) {
         this.productId = productId;
     }
 
