@@ -1,6 +1,8 @@
 package com.example.ecommerceapp.model;
 
 import javax.persistence.*;
+import javax.swing.*;
+import java.awt.*;
 
 @Entity
 public class Product {

@@ -27,12 +27,12 @@ public class CartController {
            this.cartService=cartService;
            this.userService=userService;
        }
-
+*/
       @GetMapping("/getCart")
     public String getCart(Model model, @AuthenticationPrincipal Authentication auth){
 
-        String user = userService.getCurrentlyLoggedInUser(auth);
-           cartService.getCartByUserId(user);
+        //String user = userService.getCurrentlyLoggedInUser(auth);
+           //cartService.getCartByUserId(user);
            return "ShoppingCart";
-      }*/
+      }
 }
