@@ -26,10 +26,10 @@ public class ProductService {
     }
 
     public Product addProduct(Product product){
-       return pRepo.save(product);
+        return pRepo.save(product);
     }
 
-   // public Product updateProduct(){
-   //     return pRepo.updateProduct();
-   // }
+    // public Product updateProduct(){
+    //     return pRepo.updateProduct();
+    // }
 }

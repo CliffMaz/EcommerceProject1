@@ -42,9 +42,10 @@ public class ManageProductController {
 
     @PostMapping("/addProduct")
     public String addProduct(@ModelAttribute("productForm") Product product, Model model){
-        Product p= pService.addProduct(product);
+        pService.addProduct(product);
         List<Product> allProducts=pService.getAllProducts();
         model.addAttribute("productList",allProducts);
+        model.addAttribute("menu1","Management");
         return "manageProducts";
 
     }

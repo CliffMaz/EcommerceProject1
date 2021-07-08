@@ -6,6 +6,7 @@ import com.example.ecommerceapp.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -26,27 +27,28 @@ public class ProductController {
     }
 
     @GetMapping("/all")
-    public String getAllProducts(Model model){
-
+    public String getAllProducts(Model model, Authentication auth){
+        String user= auth.getName();
         List<Product> allProducts=pService.getAllProducts();
 
-         model.addAttribute("productList",allProducts);
-
-       return "product";
+        model.addAttribute("productList",allProducts);
+        model.addAttribute("loggedUser",user);
+        model.addAttribute("signout", "Sign out");
+        return "product";
 
     }
 
     //@PostMapping("/addProduct")
     //public ResponseEntity<Product> addProduct(@RequestBody Product product){
-      //  Product p= pService.addProduct(product);
-        //return new ResponseEntity<>(p, HttpStatus.OK);
+    //  Product p= pService.addProduct(product);
+    //return new ResponseEntity<>(p, HttpStatus.OK);
 
     //}
 
-   // @PutMapping("/update")
+    // @PutMapping("/update")
     //public String updateProduct(@RequestBody Product product){
-      //  Product ToUpdate= pService.updateProduct();
-        //return "addProduct";
+    //  Product ToUpdate= pService.updateProduct();
+    //return "addProduct";
 
     //}
 }

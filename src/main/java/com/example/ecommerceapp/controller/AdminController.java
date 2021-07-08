@@ -5,6 +5,7 @@ import com.example.ecommerceapp.service.AdminService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -24,15 +25,15 @@ public class AdminController {
     }
 
     @PostMapping("/add")
-    public ResponseEntity<Admin> addAdmin(@RequestBody Admin admin){
+    public ResponseEntity<Admin> addAdmin(@RequestBody Admin admin ){
 
         Admin newAdmin=adminService.addAdmin(admin);
         return new ResponseEntity<>(newAdmin, HttpStatus.CREATED);
     }
 
     @GetMapping("/All")
-    public String getAdmins(Model model){
-
+    public String getAdmins(Model model, Authentication auth){
+        model.addAttribute("loggedUser","Welcome "+auth.getName());
         return "admin";
     }
 }

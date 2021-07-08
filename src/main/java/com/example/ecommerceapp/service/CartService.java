@@ -13,7 +13,7 @@ import java.util.Optional;
 @Service
 public class CartService {
 
-     CartRepo cartRepo;
+    CartRepo cartRepo;
 
 
     @Autowired
@@ -24,7 +24,7 @@ public class CartService {
 
     public List<Cart> getCartByUser(User user){
 
-       return cartRepo.findByUser(user);
+        return cartRepo.findByUser(user);
     }
 
     public Cart AddProduct(Cart cart){
@@ -36,4 +36,5 @@ public class CartService {
         return null;
         //return cartRepo.updateQuantityByCart();
     }
+
 }

@@ -18,12 +18,12 @@ import java.util.List;
 @RequestMapping("/category")
 public class CategoryController {
 
-   private final CategoryService categoryService;
+    private final CategoryService categoryService;
 
-   @Autowired
+    @Autowired
     CategoryController(CategoryService categoryService){
-       this.categoryService=categoryService;
-   }
+        this.categoryService=categoryService;
+    }
     @GetMapping("/all")
     public String getAllCategories(Model model){
         List<Category> categoryList= categoryService.getCategories();
@@ -34,7 +34,7 @@ public class CategoryController {
 
     @PostMapping("/add")
     public ResponseEntity<Category> addCategory(@RequestBody Category category){
-       Category newCat=categoryService.addCategory(category);
-       return new ResponseEntity<>(newCat, HttpStatus.CREATED);
+        Category newCat=categoryService.addCategory(category);
+        return new ResponseEntity<>(newCat, HttpStatus.CREATED);
     }
 }
