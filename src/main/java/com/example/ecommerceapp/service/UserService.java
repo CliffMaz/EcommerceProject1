@@ -22,7 +22,7 @@ public class UserService{
     }
 
 
-public User getCurrentlyLoggedInUser( Authentication auth){
+public User getCurrentlyLoggedInUser(@AuthenticationPrincipal Authentication auth){
 
 
     Object principal= auth.getPrincipal();
@@ -30,7 +30,7 @@ public User getCurrentlyLoggedInUser( Authentication auth){
     User user=null;
         if(auth==null) return null;
 
-            log.info("Cliford Services........");
+            log.info("Clifford not null........");
             if(principal instanceof CUserDetails){
 
                 user= userRepo.findUserByUsername(((CUserDetails) principal).getUsername());

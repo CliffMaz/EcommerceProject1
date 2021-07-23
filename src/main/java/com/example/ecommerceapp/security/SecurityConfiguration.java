@@ -14,6 +14,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 
 @Configuration
 @EnableWebSecurity
@@ -34,7 +35,6 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         return provider;
     }*/
 
-
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(userDetailsService);
@@ -44,7 +44,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
 
         http.authorizeRequests()
-                .antMatchers("/home").permitAll()
+                .antMatchers("/home","/shoppingCart/update/**","shopping/update/**","/resources/**").permitAll()
                 .antMatchers("/category/**").hasRole("ADMIN")
                 .antMatchers("/product/all","/shoppingCart/getCart").hasAnyRole("ADMIN", "USER")
                 .antMatchers("/product/**").hasRole("ADMIN")

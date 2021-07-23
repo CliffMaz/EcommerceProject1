@@ -72,7 +72,7 @@ public class ShoppingCartTest {
             assertTrue(savedItem.getCart_id()>0);
         }else{
 
-            cartRepo.updateQuantityByCartId((cart.getQuantity()+1),cart.getCart_id());
+            cartRepo.updateQuantityByCartId((cart.getQuantity()+1),cart.getCart_id(),user.getUserId());
 
         }
     }

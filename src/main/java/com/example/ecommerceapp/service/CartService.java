@@ -32,9 +32,10 @@ public class CartService {
         return cartRepo.save(cart);
     }
 
-    public  Cart updateQuantityById(){
-        return null;
-        //return cartRepo.updateQuantityByCart();
+    public  List<Cart> updateQuantityById(Integer qty, Integer cart_id, User user){
+
+         cartRepo.updateQuantityByCartId(qty,cart_id, user.getUserId());
+         return cartRepo.findByUser(user);
     }
 
 }
