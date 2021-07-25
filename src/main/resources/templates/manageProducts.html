@@ -10,66 +10,136 @@
 
 
 <div class="container text-center">
-    <div class="container">
-<form th:action="@{/productManagement/addProduct}" th:object="${productForm}" th:method="POST">
 
-    <div class="form-group">
-        <label for="formGroupExampleInput">Product name</label>
-        <input type="text" name="product_name" class="form-control" id="formGroupExampleInput" placeholder="Example input" required>
+
+<!--AddButton-->
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addProductModal">
+        Add New Product
+    </button>
+
+    <!-- AddModal -->
+    <div class="modal fade" id="addProductModal"  role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="addModalLabel">Add New Product</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+
+
+                    <div class="container">
+                        <form th:action="@{/manageProduct/addProduct}" th:object="${productForm}" th:method="POST">
+
+                            <div class="form-group">
+                                <label for="formGroupExampleInput">Product name</label>
+                                <input type="text" name="product_name" class="form-control" id="formGroupExampleInput" placeholder="Example input" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="formGroupExampleInput">Product description</label>
+                                <input type="text" name="product_desc" class="form-control" id="formGroupExampleInput" placeholder="Example input" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="formGroupExampleInput">Product price</label>
+                                <input type="text" name="product_price" class="form-control" id="formGroupExampleInput" placeholder="Example input" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleFormControlFile1"> File input</label>
+                                <input type="file" name="product_img" class="form-control-file" id="exampleFormControlFile1" required>
+                            </div>
+
+                            <select class="form-control form-control-lg" name="product_category" required>
+                                <option th:each="category: ${categoryList}" th:text="${category.categoryType}"></option>
+                            </select>
+
+
+                            <div class="container">
+                                <input  type="submit" value="save" class="btn btn-primary btn-lg btn-block"/>
+                            </div>
+                            <br/>
+
+                        </form>
+                    </div>
+
+
+
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
     </div>
-    <div class="form-group">
-        <label for="formGroupExampleInput">Product description</label>
-        <input type="text" name="product_desc" class="form-control" id="formGroupExampleInput" placeholder="Example input" required>
+
+
+    <!-- DeleteModal -->
+    <div class="modal fade" id="deleteProductModal"  role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="deleteModalLabel">Delete Product</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+
+                    Are you sure you want to delete the selected Product!
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                    <button class="btn btn-danger mx-3" id="deleteConfirmBtn" data-dismiss="modal"> Confirm Delete</button>
+                </div>
+            </div>
+        </div>
     </div>
-    <div class="form-group">
-        <label for="formGroupExampleInput">Product price</label>
-        <input type="text" name="product_price" class="form-control" id="formGroupExampleInput" placeholder="Example input" required>
-    </div>
-    <div class="form-group">
-        <label for="exampleFormControlFile1"> File input</label>
-        <input type="file" name="product_img" class="form-control-file" id="exampleFormControlFile1" required>
-    </div>
 
-    <select class="form-control form-control-lg" name="product_category" required>
-        <option th:each="category: ${categoryList}" th:text="${category.categoryType}"/>
-    </select>
-
-
-<div class="container">
-    <a href="/productManagement/addProduct"><input  type="submit" value="save" class="btn btn-primary btn-lg btn-block"/></a>
-</div>
-    <br/>
-
-</form>
-</div>
-
-
+    <!--product tables-->
 <table class="table table-sm table-dark">
-<tbody >
+
 
 <thead>
 <tr>
     <th scope="col">Product image</th>
     <th scope="col">Product id</th>
-    <td scope="col">Product name</td>
-    <td scope="col">Product Description</td>
-    <td scope="col">Product Price</td>
-    <td scope="col">Edit/Delete</td>
+    <th scope="col">Product name</th>
+    <th scope="col">Product Description</th>
+    <th scope="col">Product Price</th>
+    <th scope="col">Edit/Delete</th>
 </tr>
 </thead>
-<tr th:each="product: ${productList}">
+    <tbody >
+<tr id="ptable" th:each="product: ${productList}">
     <td th:text="${product.product_img}"></td>
-    <td th:text="${product.productId}"></td>
+    <td th:text="${product.productId}" ></td>
     <td th:text="${product.product_name}"></td>
     <td th:text="${product.product_desc}"></td>
     <td th:text="${product.product_price}"></td>
-    <td scope="col">
+
+    <td >
+        <input hidden th:value="${product.getProductId}" th:id="'productid'+${product.getProductId()}"/>
         <button class="btn btn-primary" >Edit</button>
-        <button class="btn btn-danger mx-3" >Delete</button>
+        <button class="btn btn-danger mx-3" type="button"
+                id="deleteBtn"
+
+                th:pid="${product.getProductId()}"
+                data-toggle="modal"
+                data-target="#deleteProductModal"
+                 >Delete</button>
     </td>
+
 </tr>
 </tbody>
 </table>
 </div>
+
+<script>
+    let mycsrf = "[[${_csrf.token}]]";
+    let myheader = "[[${_csrf.headerName}]]";
+</script>
 </body>
 </html>

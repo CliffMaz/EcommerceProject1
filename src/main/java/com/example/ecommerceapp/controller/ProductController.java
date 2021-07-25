@@ -38,6 +38,13 @@ public class ProductController {
 
     }
 
+    @GetMapping("/filter/{category}")
+    public String getByFilter(@PathVariable("category") String category, Model model){
+
+
+        return "product";
+
+    }
     //@PostMapping("/addProduct")
     //public ResponseEntity<Product> addProduct(@RequestBody Product product){
     //  Product p= pService.addProduct(product);

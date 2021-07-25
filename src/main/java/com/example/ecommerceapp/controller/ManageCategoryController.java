@@ -16,12 +16,12 @@ import java.util.List;
 
 @Controller
 @RequestMapping("/category")
-public class CategoryController {
+public class ManageCategoryController {
 
     private final CategoryService categoryService;
 
     @Autowired
-    CategoryController(CategoryService categoryService){
+    ManageCategoryController(CategoryService categoryService){
         this.categoryService=categoryService;
     }
     @GetMapping("/all")
@@ -32,9 +32,5 @@ public class CategoryController {
         return "manageCategory";
     }
 
-    @PostMapping("/add")
-    public ResponseEntity<Category> addCategory(@RequestBody Category category){
-        Category newCat=categoryService.addCategory(category);
-        return new ResponseEntity<>(newCat, HttpStatus.CREATED);
-    }
+
 }

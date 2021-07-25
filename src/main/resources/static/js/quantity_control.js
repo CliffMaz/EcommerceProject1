@@ -30,8 +30,12 @@ $(document).ready(function(){
         let productId = $(this).attr("pid");
         let cartId = $("#cart_id" + productId);
         let newcartId=parseInt(cartId.val());
+        console.log("fghgfo: "+ cartId);
+        console.log("fghgf: "+ newcartId);
         let quantity = $("#quantity" + productId);
         let newQty = parseInt(quantity.val()) + 1;
+
+        alert("fghgf2: "+ newQty);
         if (newQty > 0) {
             quantity.val(newQty);
 
