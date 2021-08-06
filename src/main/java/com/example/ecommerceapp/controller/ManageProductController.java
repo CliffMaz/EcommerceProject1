@@ -11,12 +11,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
 @RequestMapping("productManagement")
 public class ManageProductController {
-
+    private List<Product> products=new ArrayList<>();
     public final ProductService pService;
     public final CategoryService categoryService;
 
@@ -32,8 +33,8 @@ public class ManageProductController {
 
         List<Product> allProducts=pService.getAllProducts();
         List<Category> categoryList=categoryService.getCategories();
-
-        model.addAttribute("productList",allProducts);
+        model.addAttribute("editProduct",products);
+        model.addAttribute("productLists",allProducts);
         model.addAttribute("categoryList",categoryList);
 
         return "manageProducts";

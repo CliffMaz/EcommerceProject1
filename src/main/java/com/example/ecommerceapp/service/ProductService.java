@@ -33,7 +33,11 @@ public class ProductService {
 
         pRepo.deleteById(id);
     }
-    // public Product updateProduct(){
-    //     return pRepo.updateProduct();
-    // }
+    public Product findProductById(Integer id){
+
+       return pRepo.findProductByProductId(id);
+    }
+     public Product updateProductById(Product product){
+         return pRepo.save(product);
+     }
 }

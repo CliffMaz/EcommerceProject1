@@ -11,11 +11,71 @@
 
 <div class="container text-center">
 
+    <button class="btn btn-primary"
+            id="addProductButton"
+            data-toggle="modal"
+            data-target="#addProductModal">Add new Product</button>
 
-<!--AddButton-->
-    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addProductModal">
-        Add New Product
-    </button>
+
+    <!-- EditModal -->
+    <div class="modal fade" id="editProductModal"  role="dialog" aria-labelledby="editModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="editModalLabel">Add New Product</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+
+
+                    <div class="container" >
+                        <form th:action="@{/manageProduct/update}"  th:object="${productFormEdit}"  th:method="POST">
+
+                            <div hidden>
+                                <input   type="text" name="productId" class="form-control" id="pId" placeholder="Example input" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="pName">Product name</label>
+                                <input type="text"  name="product_name" class="form-control" id="pName" placeholder="Name input" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="pDesc">Product description</label>
+                                <input type="text"  name="product_desc" class="form-control" id="pDesc" placeholder="Description input" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="pPriceInput">Product price</label>
+                                <input type="text"  name="product_price" class="form-control" id="pPriceInput" placeholder="Price input" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="pImg"> File input</label>
+                                <input type="file" name="product_img"  class="form-control-file" id="pImg" required>
+                            </div>
+                            <label for="pCat">Product Category</label>
+                            <select class="form-control form-control-lg" name="product_category" required>
+                                <option th:each="category: ${categoryList}" id="pCat"></option>
+                            </select>
+
+
+                            <div class="container">
+                                <input   type="submit" value="save" class="btn btn-primary btn-lg btn-block"/>
+                            </div>
+                            <br/>
+
+                        </form>
+                    </div>
+
+
+
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <!-- AddModal -->
     <div class="modal fade" id="addProductModal"  role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -113,7 +173,7 @@
 </tr>
 </thead>
     <tbody >
-<tr id="ptable" th:each="product: ${productList}">
+<tr id="ptable" th:each="product: ${productLists}">
     <td th:text="${product.product_img}"></td>
     <td th:text="${product.productId}" ></td>
     <td th:text="${product.product_name}"></td>
@@ -122,7 +182,10 @@
 
     <td >
         <input hidden th:value="${product.getProductId}" th:id="'productid'+${product.getProductId()}"/>
-        <button class="btn btn-primary" >Edit</button>
+        <button class="btn btn-primary"
+                id="editButton"
+                data-toggle="modal"
+                data-target="#editProductModal" th:pid="${product.getProductId()}">Edit</button>
         <button class="btn btn-danger mx-3" type="button"
                 id="deleteBtn"
 

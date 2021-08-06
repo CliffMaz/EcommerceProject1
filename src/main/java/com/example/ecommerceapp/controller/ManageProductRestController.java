@@ -9,12 +9,15 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
 @RequestMapping("/manageProduct")
 public class ManageProductRestController {
 
+    private List<Product> products=new ArrayList<>();
+    private List<Product> allProducts=new ArrayList<>();
     public final ProductService pService;
     public final CategoryService categoryService;
 
@@ -25,26 +28,35 @@ public class ManageProductRestController {
         this.categoryService=categoryService;
     }
 
+    @GetMapping("/find/{id}")
+    public ResponseEntity<Product> findProductById(@PathVariable("id") Integer id, Model model){
+
+        Product product=pService.findProductById(id);
+
+        return new ResponseEntity<>(product, HttpStatus.OK);
+    }
     @PostMapping("/addProduct")
     public String addProduct(@ModelAttribute("productForm") Product product, Model model){
         pService.addProduct(product);
-        List<Product> allProducts=pService.getAllProducts();
-        model.addAttribute("productList",allProducts);
+        allProducts=pService.getAllProducts();
+        model.addAttribute("productItem",allProducts);
         model.addAttribute("menu1","Management");
         return "manageProducts";
 
     }
 
-    @DeleteMapping("/delete/{id}")
-    public void deleteProduct(@PathVariable("id") Integer id){
+   /* @DeleteMapping("/delete/{id}")
+    public void deleteProduct(@PathVariable("id") Integer id, Model model){
 
         pService.deleteProductById(id);
+        allProducts=pService.getAllProducts();
+        model.addAttribute("productList", allProducts);
+    }*/
+     @PostMapping("/update")
+    public void updateProduct(@ModelAttribute("productFormEdit") Product product){
+         System.out.println("siya tester: "+product.getProductId());
+        Product toUpdate= pService.updateProductById(product);
+      System.out.println("siya testa: "+product.getProductId());
 
     }
-    // @PutMapping("/update")
-    //public String updateProduct(@RequestBody Product product){
-    //  Product ToUpdate= pService.updateProduct();
-    //return "addProduct";
-
-    //}
 }

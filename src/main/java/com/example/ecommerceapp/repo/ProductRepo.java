@@ -8,8 +8,5 @@ import org.springframework.stereotype.Repository;
 public interface ProductRepo extends JpaRepository<Product, Integer>{
 
 
-   // void deleteProductById(Integer id);
-
-
-    // Product updateProduct();
+    Product findProductByProductId(Integer product_id);
 }
